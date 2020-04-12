@@ -1,7 +1,11 @@
 void main() {
  
   for(var i=0;i<100;i++){
-   solusi1(); 
+//    uncomment to try the methode
+//       solusi1(); 
+//       solusi2(); 
+//       solusi3(); 
+//       solusi4(); 
   }
 }
 
