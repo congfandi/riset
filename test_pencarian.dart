@@ -1,11 +1,17 @@
+/*
+ * test_pencarian.dart
+ * Created by Cong Fandi on 17/3/2020
+ * Email : congfandi@gmail.com
+ * Copyright © 2020 Cong Fandi. All rights reserved.
+ */
 void main() {
  
   for(var i=0;i<100;i++){
-//    uncomment to try the methode
-//       solusi1(); 
-//       solusi2(); 
-//       solusi3(); 
-//       solusi4(); 
+//     solusi1();
+    solusi2();
+//     solusi3();
+//     solusi4();
+//     solusi5(double.infinity,0,new Data()); 
   }
 }
 
@@ -21,7 +27,7 @@ class Data {
   }
 }
 
-//simulasi terdapat 10 data training
+//simulasi jika ada 10 data
 //hanya ada 4 data yang dianggap masuk dalam area
 //asumsi data yang ada dalam area adalah diatas 3 dan dibawah 8
 //jarak terkecil yang akan diambil
@@ -37,6 +43,25 @@ final dataTrainig = [
   new Data(lat: 9, lang: 9, jarak: 9.0),
   new Data(lat: 10, lang: 10, jarak: 3.0),
 ];
+
+solusi5(double jarakTerdekat, int index, Data dataTerdekat) {
+  final stopwatch = Stopwatch()..start();
+  if (index < dataTrainig.length - 1) {
+    if (jarakTerdekat > dataTrainig[index].jarak) {
+      jarakTerdekat = dataTrainig[index].jarak;
+      dataTerdekat = dataTrainig[index];
+      index++;
+      solusi5(jarakTerdekat, index, dataTerdekat);
+    } else {
+      index++;
+      solusi5(jarakTerdekat, index, dataTerdekat);
+    }
+  } else {
+    print('${stopwatch.elapsed.toString().split(':')[2].split('.')[1]}');
+  }
+  return jarakTerdekat;
+}
+
 solusi4() {
    final stopwatch = Stopwatch()..start();
   double jarakTerdekat = double.infinity;
