@@ -17,7 +17,7 @@ class Data {
   }
 }
 
-//simulasi jika ada 10 data
+//simulasi terdapat 10 data training
 //hanya ada 4 data yang dianggap masuk dalam area
 //asumsi data yang ada dalam area adalah diatas 3 dan dibawah 8
 //jarak terkecil yang akan diambil
