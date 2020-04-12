@@ -4,14 +4,32 @@
  * Email : congfandi@gmail.com
  * Copyright © 2020 Cong Fandi. All rights reserved.
  */
+import 'dart:math';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:planimal/utils/convert_price.dart';
+
 void main() {
- 
-  for(var i=0;i<100;i++){
-//     solusi1();
-    solusi2();
-//     solusi3();
-//     solusi4();
-//     solusi5(double.infinity,0,new Data()); 
+
+//simulasi jika ada 10.000 data
+//asumsi data yang ada dalam area adalah diatas 3 dan dibawah 8
+//jarak terkecil yang akan diambil
+
+  for (var i = 0; i < 10000; i++) {
+//    generate 10k Data
+    dataTrainig
+        .add(new Data(lat: i, lang: i, jarak: new Random().nextDouble() * 10));
+  }
+
+  for (var i = 0; i < 100; i++) {
+//    finding Solution
+    final stopwatch = Stopwatch()..start();
+//        solusi1();
+//        solusi2();
+//        solusi3();
+//        solusi4();
+        solusi5(double.infinity, 0, new Data());
+    print('${stopwatch.elapsed.toString().split(':')[2].split('.')[1]}');
   }
 }
 
@@ -27,25 +45,9 @@ class Data {
   }
 }
 
-//simulasi jika ada 10 data
-//hanya ada 4 data yang dianggap masuk dalam area
-//asumsi data yang ada dalam area adalah diatas 3 dan dibawah 8
-//jarak terkecil yang akan diambil
-final dataTrainig = [
-  new Data(lat: 1, lang: 1, jarak: 3.45),
-  new Data(lat: 2, lang: 2, jarak: 3.20),
-  new Data(lat: 3, lang: 3, jarak: 3.50),
-  new Data(lat: 4, lang: 4, jarak: 3.30),
-  new Data(lat: 5, lang: 5, jarak: 5.10),
-  new Data(lat: 6, lang: 6, jarak: 3.90),
-  new Data(lat: 7, lang: 7, jarak: 7.0),
-  new Data(lat: 8, lang: 8, jarak: 3.15),
-  new Data(lat: 9, lang: 9, jarak: 9.0),
-  new Data(lat: 10, lang: 10, jarak: 3.0),
-];
+final dataTrainig = [];
 
 solusi5(double jarakTerdekat, int index, Data dataTerdekat) {
-  final stopwatch = Stopwatch()..start();
   if (index < dataTrainig.length - 1) {
     if (jarakTerdekat > dataTrainig[index].jarak) {
       jarakTerdekat = dataTrainig[index].jarak;
@@ -57,13 +59,12 @@ solusi5(double jarakTerdekat, int index, Data dataTerdekat) {
       solusi5(jarakTerdekat, index, dataTerdekat);
     }
   } else {
-    print('${stopwatch.elapsed.toString().split(':')[2].split('.')[1]}');
+    jarakTerdekat = dataTerdekat.jarak;
   }
   return jarakTerdekat;
 }
 
 solusi4() {
-   final stopwatch = Stopwatch()..start();
   double jarakTerdekat = double.infinity;
   Data dataTerdekat;
   int totalData = dataTrainig.length;
@@ -76,12 +77,10 @@ solusi4() {
       }
     }
   }
-  print('${stopwatch.elapsed.toString().split(':')[2].split('.')[1]}');
   return jarakTerdekat;
 }
 
 solusi3() {
-   final stopwatch = Stopwatch()..start();
   double jarakTerdekat = double.infinity;
   Data dataTerdekat;
   for (var i = 0; i < dataTrainig.length; i++) {
@@ -93,12 +92,10 @@ solusi3() {
       }
     }
   }
-  print('${stopwatch.elapsed.toString().split(':')[2].split('.')[1]}');
   return jarakTerdekat;
 }
 
 solusi2() {
-   final stopwatch = Stopwatch()..start();
   double jarakTerdekat = double.infinity;
   Data dataTerdekat;
   for (Data data in dataTrainig) {
@@ -109,12 +106,10 @@ solusi2() {
       }
     }
   }
-  print('${stopwatch.elapsed.toString().split(':')[2].split('.')[1]}');
   return jarakTerdekat;
 }
 
 solusi1() {
-  final stopwatch = Stopwatch()..start();
   double jarakTerdekat = double.infinity;
   Data dataTerdekat;
   dataTrainig.forEach((data) {
@@ -125,6 +120,5 @@ solusi1() {
       }
     }
   });
-  print('${stopwatch.elapsed.toString().split(':')[2].split('.')[1]}');
   return jarakTerdekat;
 }
